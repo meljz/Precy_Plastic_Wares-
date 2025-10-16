@@ -1,0 +1,29 @@
+{% extends 'basestructure.html' %}
+{% load static %}
+
+{% block title %} About {% endblock %}
+
+{% block content %} 
+     <div class="about_wrapper">
+      <section id="about" class="about_section">
+        <h2>Precy Plastic Wares Story</h2>
+        <p>Precy Plastic Wares is a local business that originated in the bustling Pampang Public Market in Pampanga, Philippines. Established with the mission to provide affordable yet high-quality plastic products, Precy Plastic Wares has grown to become a trusted name among households and small businesses across the region.</p> 
+        <br>
+
+          <p>We specialize in offering a wide variety of plastic wares, including storage containers, kitchen utensils, and everyday household essentials designed to meet the needs of modern living. Our products are crafted to be durable, practical, and environmentally friendly, ensuring customer satisfaction with every purchase.</p>
+          <br>
+
+      </section>
+
+      <section class="about_hero">
+      <div class="hero-text">
+      
+        <img src="{% static 'image/owner.jpg'%}" class="about_hero_image" alt="Owner" />
+                <h1>Owner:</h1>
+          <p>Precy Reyes:</p>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+

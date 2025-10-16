@@ -1,0 +1,61 @@
+{% extends 'basestructure.html' %}
+{% load static %}
+
+{% block title %} Product {% endblock %}
+
+{% block content %} 
+<section class="product_section" id="products">
+    <h2>Products</h2>
+    <p>Take a closer look at our products, store, and happy customers!</p>
+
+    <!-- Filters -->
+    <div class="product-filters">
+      <label for="filter-price">Price:</label>
+      <select id="filter-price">
+        <option value="all">All</option>
+        <option value="under200">Under ₱200</option>
+        <option value="200to350">₱200 - ₱350</option>
+        <option value="above350">Above ₱350</option>
+      </select>
+
+      <label for="filter-color">Color:</label>
+      <select id="filter-color">
+        <option value="all">All</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+      </select>
+
+      <label for="filter-brand">Brand:</label>
+      <select id="filter-brand">
+        <option value="all">All</option>
+        <option value="precy">Precy</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="filter-name">Name:</label>
+      <input type="text" id="filter-name" placeholder="Search product name">
+
+      <label for="sort">Sort by:</label>
+      <select id="sort">
+        <option value="default">Default</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name-asc">Name: A → Z</option>
+        <option value="name-desc">Name: Z → A</option>
+      </select>
+    </div>
+
+    <div class="product-grid" id="productList"></div>
+  </section>
+
+  <script>
+    const staticPath = "{% static 'image/' %}";
+  </script>
+  <script src="{% static 'js/product.js' %}"></script>
+
+
+{% endblock %}
+
+

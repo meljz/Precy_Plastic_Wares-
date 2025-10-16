@@ -1,0 +1,20 @@
+{% extends 'basestructure.html' %}
+{% load static %}
+
+{% block title %} About {% endblock %}
+
+{% block content %} 
+
+    <section id="contact" class="contact_section">
+    <form id="contactForm">
+      <h2>Contact Us</h2>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <input type="tel" placeholder="Your Contact Number" required />
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
+
+{% endblock %}
+

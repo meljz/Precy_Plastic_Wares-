@@ -1,0 +1,19 @@
+{% extends 'basestructure.html' %}
+{% load static %}
+
+{% block title %} Homepage {% endblock %}
+
+{% block content %} 
+
+  <section class="hero">
+    <img src="{% static 'image/hero.jpg' %}" class="hero-image" alt="Plastic Products" />
+    <div class="hero-text">
+      <h1>Quality Plastic Wares for Everyday Use</h1>
+      <p>Affordable. Durable. Reliable. Shop all your plastic storage and kitchen needs at Precy Plastic Wares.</p>
+      <br>
+      <br>
+      <a href="productpage.html" class="btn">Shop Now</a>
+    </div>
+  </section>
+
+{% endblock %}

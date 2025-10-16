@@ -1,0 +1,102 @@
+{% extends 'basestructure.html' %}
+{% load static %}
+
+{% block title %} Featured {% endblock %}
+
+
+{% block content %} 
+    <!-- Vertical scroll  -->
+<div class="vertical-scroll">
+
+      <section class="scroll-section infographic-section">
+  <h2 class="info-title">💡 Mini Infographics: <br> 5 Smart Ways to Use Your <strong>Basin</strong> Every Day!</h2>
+
+    <!--IMAGES ARE ON THE STATIC/JS/-->
+  <div class="info-flow">
+    <div class="info-card">
+      <span class="icon">🧺</span>
+      <h3>Laundry</h3>
+      <p>Carry and soak up to 20kg of clothes.</p>
+    </div>
+    <div class="info-card">
+      <span class="icon">🥬</span>
+      <h3>Vegetables</h3>
+      <p>Wash and sort fresh produce with ease.</p>
+    </div>
+    <div class="info-card">
+      <span class="icon">🐶</span>
+      <h3>Pet Care</h3>
+      <p>Perfect size for bathing small pets.</p>
+    </div>
+    <div class="info-card">
+      <span class="icon">🍚</span>
+      <h3>Storage</h3>
+      <p>Safely store rice, grains, or dry goods.</p>
+    </div>
+    <div class="info-card">
+      <span class="icon">🎉</span>
+      <h3>Events</h3>
+      <p>Reusable for parties, games, or gatherings.</p>
+    </div>
+  </div>
+</section>
+
+
+    <section class="scroll-section section1">
+      <h2><strong>Rainbow of Everyday Essentials</strong> <br><br>Meet our premium collection of colorful timba - the versatile workhorses of Filipino households. These beautifully stacked basins showcase a vibrant spectrum from deep emerald greens and rich burgundies to bright coral pinks and ocean blues. Each timba represents decades of trusted craftsmanship and practical design.
+Whether you're doing laundry, bathing the kids, storing water, or tackling household chores, our diverse color palette ensures there's a perfect shade for every family's needs. Built tough enough for daily use yet stylish enough to brighten any space, these timba prove that practical doesn't have to mean plain.<br><br><em>From washing to storage, from utility to style - discover why Filipino families have trusted our timba for generations.</em></h2>
+
+      <img src="{% static 'image/palengke_image_4.jpg' %}" alt="Colorful Timba Collection" />
+    </section>
+
+    <section class="scroll-section section2">
+      <h2><strong>The Cleaning Arsenal That Never Quits</strong> <br><br>Meet our premium collection of colorful timba - the versatile workhorses of Filipino households. These beautifully stacked basins showcase a vibrant spectrum from deep emerald greens and rich burgundies to bright coral pinks and ocean blues. Each timba represents decades of trusted craftsmanship and practical design.
+Whether you're doing laundry, bathing the kids, storing water, or tackling household chores, our diverse color palette ensures there's a perfect shade for every family's needs. Built tough enough for daily use yet stylish enough to brighten any space, these timba prove that practical doesn't have to mean plain.<br><br><em>From washing to storage, from utility to style - discover why Filipino families have trusted our timba for generations.</em></h2>
+
+      <img src="{% static 'image/palengke_image_3.jpg'%}" alt="Colorful Timba Collection" />
+    </section>
+    <section class="scroll-section section3">
+      <h2><strong>The Heart of Every Filipino Kitchen</strong> <br><br>From sizzling adobo and crispy lumpia to perfectly tossed pancit and golden fried rice, this wok handles every Filipino favorite with ease. Its spacious cooking surface accommodates family-sized portions while the ergonomic handles ensure safe, comfortable cooking. Whether you're a seasoned chef or just starting your culinary journey, this wok delivers consistent results that bring families together around the dinner table.<br><br><em>From quick weeknight dinners to festive celebrations - discover why generations of Filipino cooks have trusted the timeless versatility of a quality wok.</em></h2>
+
+      <img src="{% static 'image/palengke_image_1.jpg'%}" alt="Colorful Timba Collection" />
+    </section>
+    
+
+   <section class="scroll-section section4">
+  <!-- Product/Feature Cards -->
+   <h2>WHY CHOOSE US?</h2>
+  <div class="product-grid">
+          
+
+    <div class="product-card">
+      <h3>High Quality</h3>
+      <p>Products are made from superior, high-quality materials to ensure the best user experience.</p>
+    </div>
+    <div class="product-card">
+      <h3>Durable</h3>
+      <p>Our products are carefully tested for durability, ensuring they withstand daily use.</p>
+    </div>
+    <div class="product-card">
+      <h3>Supports Local Business</h3>
+      <p>We source items from local businesses in the Philippines to promote homegrown products.</p>
+    </div>
+  </div>
+</section>
+
+<section class="scroll-section section5">
+  <div class="section-media-showcase">
+    <h2>Featured Moments (Images and Videos)</h2>
+    <div class="media-showcase-grid">
+      <div class="media-item-photo"><img src="{% static 'image/featured_photo_1.jpg'%}" alt="Featured Image 1"></div>
+      <div class="media-item-photo"><img src="{% static 'image/featured_photo_2.jpg'%}" alt="Featured Image 2"></div>
+      <div class="media-item-photo"><img src="{% static 'image/featured_photo_3.jpg'%}" alt="Featured Image 3"></div>
+      <div class="media-item-photo"><img src="{% static 'image/featured_photo_4.jpg'%}" alt="Featured Image 4"></div>
+      <div class="media-item-video"><video src="{% static 'image/vid_1.mp4'%}" controls></video></div>
+      <div class="media-item-video"><video src="{% static 'image/vid_2.mp4'%}" controls></video></div>
+      <div class="media-item-video"><video src="{% static 'image/vid_3.mp4'%}" controls></video></div>
+    </div>
+  </div>
+  </section>
+
+
+{% endblock %}
