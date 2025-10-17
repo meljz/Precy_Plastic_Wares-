@@ -129,3 +129,36 @@ renderProducts(products);
       window.location.href = `${socialMockupBaseUrl}?platform=${platform}`;
     }
   }
+
+  //WILL FETCH AND RENDER DATA's API
+  fetch('/api/customers/')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('customer-list');
+    data.forEach(customer => {
+      container.innerHTML += `
+        <div>
+          <strong>${customer.name}</strong><br>
+          Email: ${customer.email}<br>
+          Contact: ${customer.contact_number}<br>
+          Location: ${customer.location}<br><br>
+        </div>
+      `;
+    });
+  });
+  
+  //WILL FETCH AND RENDER DATA's API
+  fetch('/api/messages/')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('message-list');
+    data.forEach(msg => {
+      container.innerHTML += `
+        <div>
+          <strong>${msg.name}</strong> (${msg.email})<br>
+          Message: ${msg.message}<br>
+          Sent: ${new Date(msg.date_sent).toLocaleString()}<br><br>
+        </div>
+      `;
+    });
+  });
