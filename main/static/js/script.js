@@ -1,17 +1,5 @@
-const products = [
-  { name: "Mini Wok", price: "₱250.00", image: staticPath + "palengke_image_1.jpg", alt: "Mini Wok", color: "red", brand: "precy", quantity: 1 },
-  { name: "Container Bucket (timba)", price: "₱180.00", image: staticPath + "palengke_image_2.jpg", alt: "Container Bucket (timba)", color: "blue", brand: "precy", quantity: 1 },
-  { name: "Toilet Brush", price: "₱95.00", image: staticPath + "palengke_image_3.jpg", alt: "Toilet Brush", color: "green", brand: "other", quantity: 1 },
-  { name: "Container Bucket (timba)", price: "₱350.00", image: staticPath + "palengke_image_4.jpg", alt: "Container Bucket (timba)", color: "yellow", brand: "precy", quantity: 1 },
-  { name: "Jug", price: "₱350.00", image: staticPath + "palengke_image_5.jpg", alt: "Jug", color: "red", brand: "precy", quantity: 1 },
-  { name: "Water Dipper", price: "₱350.00", image: staticPath + "palengke_image_6.jpg", alt: "Water Dipper", color: "blue", brand: "precy", quantity: 1 },
-  { name: "Foot Doormat", price: "₱350.00", image: staticPath + "palengke_image_7.jpg", alt: "Foot Doormat", color: "green", brand: "other", quantity: 1 },
-  { name: "Chicken Feather Brush", price: "₱350.00", image: staticPath + "palengke_image_8.jpg", alt: "Chicken Feather Brush", color: "yellow", brand: "precy", quantity: 1 },
-  { name: "Brush", price: "₱350.00", image: staticPath + "palengke_image_9.jpg", alt: "Brush", color: "red", brand: "precy", quantity: 1 },
-  { name: "Whisk", price: "₱350.00", image: staticPath + "palengke_image_10.jpg", alt: "Whisk", color: "blue", brand: "precy", quantity: 1 },
-  { name: "Drinking Glass", price: "₱350.00", image: staticPath + "palengke_image_11.jpg", alt: "Drinking Glass", color: "green", brand: "other", quantity: 1 },
-  { name: "Kawali", price: "₱350.00", image: staticPath + "palengke_image_12.jpg", alt: "Kawali", color: "yellow", brand: "precy", quantity: 1 }
-];
+
+ let products = [];
 
 const productList = document.getElementById("productList");
 const filterPrice = document.getElementById("filter-price");
@@ -20,9 +8,26 @@ const filterBrand = document.getElementById("filter-brand");
 const filterName = document.getElementById("filter-name");
 const sortSelect = document.getElementById("sort");
 
-// Cart count
 let cartCount = 0;
 
+// Fetch products from API
+function fetchProductsFromAPI(query = '') {
+  fetch(`/api/products/?search=${query}`)
+    .then(res => res.json())
+    .then(data => {
+      // Format price and image if needed
+      products = data.map(p => ({
+        ...p,
+        price: `₱${parseFloat(p.price).toFixed(2)}`,
+        image: p.image || staticPath + "default.jpg", // fallback image
+        alt: p.alt || p.name,
+        quantity: p.quantity || 1
+      }));
+      filterAndSortProducts();
+    });
+}
+
+// Render products
 function renderProducts(filteredProducts) {
   productList.innerHTML = "";
 
@@ -48,7 +53,7 @@ function renderProducts(filteredProducts) {
     `;
     productList.appendChild(card);
 
-    // Add to Cart button functionality
+    // Cart logic
     document.getElementById(`cart-${index}`).addEventListener("click", () => {
       const qty = document.getElementById(`qty-${index}`).value;
       cartCount += parseInt(qty);
@@ -56,22 +61,24 @@ function renderProducts(filteredProducts) {
       alert(`${product.name} added to cart (${qty})`);
     });
 
-    // Rating functionality
+    // Rating logic
     const ratingStars = document.getElementById(`rating-${index}`).querySelectorAll("span");
     ratingStars.forEach(star => {
       star.addEventListener("click", () => {
         const rating = parseInt(star.getAttribute("data-star"));
-        ratingStars.forEach(s => s.innerHTML = s.getAttribute("data-star") <= rating ? "★" : "☆");
+        ratingStars.forEach(s => {
+          s.innerHTML = s.getAttribute("data-star") <= rating ? "★" : "☆";
+        });
         alert(`You rated ${product.name} ${rating} star(s)!`);
       });
     });
   });
 }
 
+// Filter and sort logic
 function filterAndSortProducts() {
   let filtered = [...products];
 
-  // Price filter
   const priceValue = filterPrice.value;
   filtered = filtered.filter(p => {
     const priceNum = Number(p.price.replace(/₱|,/g, ""));
@@ -81,19 +88,15 @@ function filterAndSortProducts() {
     return true;
   });
 
-  // Color filter
   const colorValue = filterColor.value;
-  if (colorValue !== "all") filtered = filtered.filter(p => p.color === colorValue);
+  if (colorValue !== "all") filtered = filtered.filter(p => p.color.toLowerCase() === colorValue);
 
-  // Brand filter
   const brandValue = filterBrand.value;
   if (brandValue !== "all") filtered = filtered.filter(p => p.brand === brandValue);
 
-  // Name search
   const nameValue = filterName.value.toLowerCase();
   if (nameValue) filtered = filtered.filter(p => p.name.toLowerCase().includes(nameValue));
 
-  // Sort
   const sortValue = sortSelect.value;
   if (sortValue === "price-asc") filtered.sort((a,b) => Number(a.price.replace(/₱|,/g,"")) - Number(b.price.replace(/₱|,/g,"")));
   else if (sortValue === "price-desc") filtered.sort((a,b) => Number(b.price.replace(/₱|,/g,"")) - Number(a.price.replace(/₱|,/g,"")));
@@ -107,58 +110,84 @@ function filterAndSortProducts() {
 filterPrice.addEventListener("change", filterAndSortProducts);
 filterColor.addEventListener("change", filterAndSortProducts);
 filterBrand.addEventListener("change", filterAndSortProducts);
-filterName.addEventListener("input", filterAndSortProducts);
+filterName.addEventListener("input", () => fetchProductsFromAPI(filterName.value));
 sortSelect.addEventListener("change", filterAndSortProducts);
+// ✅ Initial product load
+fetchProductsFromAPI();
 
-// Initial render
-renderProducts(products);
+// ✅ Contact form submission: save data + redirect
+function handleRedirect(event) {
+  event.preventDefault();
 
-//script for contact page
- function handleRedirect(event) {
-    event.preventDefault();
+  const name = document.getElementById("contact-name").value;
+  const email = document.getElementById("contact-email").value;
+  const contact = document.getElementById("contact-number").value;
+  const location = document.getElementById("contact-location")?.value || "";
+  const message = document.getElementById("contact-message").value; // ✅ capture message
+  const platform = document.getElementById("platform").value;
 
-    const platform = document.getElementById("platform").value;
-    if (!platform) {
-      alert("Please select a platform.");
-      return;
-    }
-
-    if (platform === "email") {
-      window.location.href = emailMockupUrl;
-    } else {
-      window.location.href = `${socialMockupBaseUrl}?platform=${platform}`;
-    }
+  if (!platform) {
+    alert("Please select a platform.");
+    return;
   }
 
-  //WILL FETCH AND RENDER DATA's API
-  fetch('/api/customers/')
+  // Save contact info + message to backend
+  fetch('/api/submit-contact/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, email, contact, location, message }) // ✅ include message
+  })
   .then(res => res.json())
   .then(data => {
-    const container = document.getElementById('customer-list');
-    data.forEach(customer => {
-      container.innerHTML += `
-        <div>
-          <strong>${customer.name}</strong><br>
-          Email: ${customer.email}<br>
-          Contact: ${customer.contact_number}<br>
-          Location: ${customer.location}<br><br>
-        </div>
-      `;
-    });
+    console.log("Contact saved:", data.message);
+    // Redirect after saving
+    window.location.href = platform === "email"
+      ? emailMockupUrl
+      : `${socialMockupBaseUrl}?platform=${platform}`;
+  })
+  .catch(error => {
+    console.error("Error saving contact:", error);
+    alert("Something went wrong while saving your contact info.");
   });
-  
-  //WILL FETCH AND RENDER DATA's API
+}
+
+// ✅ Customer list display (only if element exists)
+if (document.getElementById('customer-list')) {
+  fetch('/api/customer/')
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById('customer-list');
+      data.forEach(customer => {
+        container.innerHTML += `
+          <div>
+            <strong>${customer.name}</strong><br>
+            Email: ${customer.email}<br>
+            Contact: ${customer.contact_number}<br>
+            Location: ${customer.location}<br><br>
+          </div>
+        `;
+      });
+    })
+    .catch(error => console.error('Error fetching customers:', error));
+}
+
+// ✅ Customer messages display (only if element exists)
+if (document.getElementById('message-list')) {
   fetch('/api/messages/')
-  .then(res => res.json())
-  .then(data => {
-    const container = document.getElementById('message-list');
-    data.forEach(msg => {
-      container.innerHTML += `
-        <div>
-          <strong>${msg.name}</strong> (${msg.email})<br>
-          Message: ${msg.message}<br>
-          Sent: ${new Date(msg.date_sent).toLocaleString()}<br><br>
-        </div>
-      `;
-    });
-  });
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById('message-list');
+      data.forEach(msg => {
+        container.innerHTML += `
+          <div>
+            <strong>${msg.name}</strong> (${msg.email})<br>
+            Message: ${msg.message}<br>
+            Sent: ${new Date(msg.date_sent).toLocaleString()}<br><br>
+          </div>
+        `;
+      });
+    })
+    .catch(error => console.error('Error fetching messages:', error));
+}

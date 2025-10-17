@@ -2,7 +2,9 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Product, Customer, ContactMessage
 from .serializers import ProductSerializer, CustomerSerializer, ContactMessageSerializer
-
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
 
 def home(request):
     return render (request, "landing.html")
@@ -30,11 +32,41 @@ def social_mockup (request):
     return render (request, "social_mockup.html", {"platform": platform})
 
 def customer_list_page(request):
-    return render(request, 'customer_list.html')
+    customers = Customer.objects.all().order_by('-id')  # newest first
+    return render(request, 'customer_list.html', {"customers": customers})
+
 
 def customer_messages_page(request):
-    return render(request, 'customer_messages.html')
+    messages = ContactMessage.objects.all().order_by('-date_sent')
+    return render(request, 'customer_message.html', {"messages": messages})
 
+
+@csrf_exempt
+def submit_contact(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data.get('name')
+        email = data.get('email')
+        contact = data.get('contact')
+        location = data.get('location', '')
+        message = data.get('message')  # ✅ new
+
+        # Save to Customer
+        Customer.objects.create(
+            name=name,
+            email=email,
+            contact_number=contact,
+            location=location
+        )
+
+        # Save to ContactMessage
+        ContactMessage.objects.create(
+            name=name,
+            email=email,
+            message=message
+        )
+
+        return JsonResponse({'message': 'Contact saved successfully'})
 
 class ProductListView(generics.ListAPIView):
     queryset = Product.objects.all()
@@ -47,3 +79,4 @@ class CustomerListView(generics.ListAPIView):
 class ContactMessageListView(generics.ListAPIView):
     queryset = ContactMessage.objects.all()
     serializer_class = ContactMessageSerializer
+

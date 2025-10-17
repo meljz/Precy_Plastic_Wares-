@@ -1,10 +1,33 @@
 {% extends 'basestructure.html' %}
 {% load static %}
 
-{% block title %} About {% endblock %}
+{% block title %} Customer List {% endblock %}
 
 {% block content %} 
-    <h1>Customer List</h1>
-    <div id="customer-list"></div>
-{% endblock %}
+  <h1>Customer List</h1>
 
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact Number</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for customer in customers %}
+      <tr>
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.contact_number }}</td>
+        <td>{{ customer.location }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">No customers yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

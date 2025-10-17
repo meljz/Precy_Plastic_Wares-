@@ -16,6 +16,8 @@ urlpatterns = [
     path('api/products/', ProductListView.as_view(), name='product-list'),
     path('api/customer/', CustomerListView.as_view(), name='customer-list'),
     path('api/messages/', ContactMessageListView.as_view(), name='message-list'),
+    path('api/submit-contact/', views.submit_contact, name='submit-contact'),
+
     
     path('customer-list/', views.customer_list_page, name='customer-list-page'),
     path('customer-messages/', views.customer_messages_page, name='customer-messages-page'),

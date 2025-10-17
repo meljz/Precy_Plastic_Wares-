@@ -7,10 +7,13 @@
 <section id="contact" class="contact_section">
   <form id="contactForm" onsubmit="handleRedirect(event)">
     <h2>Contact Us</h2>
-    <input type="text" placeholder="Your Name" required />
-    <input type="email" placeholder="Your Email" required />
-    <input type="tel" placeholder="Your Contact Number" required />
-    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <input type="text" id="contact-name" placeholder="Your Name" required />
+    <input type="email" id="contact-email" placeholder="Your Email" required />
+    <input type="tel" id="contact-number" placeholder="Your Contact Number" required />
+    <input type="text" id="contact-location" placeholder="Your Location" />
+    <textarea id="contact-message" name="message" placeholder="Your Message" rows="5" required></textarea>
+
+
 
     <label for="platform">Choose Marketing Platform:</label>
     <select id="platform" name="platform" required>
@@ -23,6 +26,10 @@
     <button type="submit" class="btn">Send Message</button>
   </form>
 </section>
+
+<a href="{% url 'customer-list-page' %}" class="btn view-customers-btn">View Customer List</a>
+<a href="{% url 'customer-messages-page' %}" class="btn view-messages-btn">View Contact Messages</a>
+
 
 <div class="map">
   <h2>Visit Us</h2>
