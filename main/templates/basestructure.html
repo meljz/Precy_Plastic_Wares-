@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{% block title %} {% endblock %}</title>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/email_mockup.css' %}">
+<link rel="stylesheet" href="{% static 'css/social_mockup.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 
 </head>
-
 <body>
  <header>
     <div class="logo">
@@ -35,6 +36,11 @@
     <p>&copy; 2025 Precy Plastic Wares. All rights reserved.</p>
   </footer>
 
+  <script>
+    const emailMockupUrl = "{% url 'email_mockup' %}";
+    const socialMockupBaseUrl = "{% url 'social_mockup' %}";
+    
+  </script>
   <script src="{% static 'js/script.js' %}"></script>
 
 </body>

@@ -1,0 +1,25 @@
+.social-mockup-section {
+  padding: 40px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.mockup {
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: white;
+}
+
+.mockup img {
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+
+.facebook { border-left: 6px solid #1877f2; }
+.instagram { border-left: 6px solid #e1306c; }
+.tiktok { border-left: 6px solid #000000; }
+.youtube { border-left: 6px solid #ff0000; }

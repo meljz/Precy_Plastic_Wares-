@@ -19,4 +19,11 @@ def contact(request):
 def signup(request):
     return render (request, "signup.html")
 
+def email_mockup (request):
+    return render (request, "email_mockup.html")
 
+def social_mockup (request):
+    platform = request.GET.get('platform', '')
+    return render (request, "social_mockup.html", {"platform": platform})
+
+                           

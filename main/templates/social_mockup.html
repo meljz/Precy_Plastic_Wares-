@@ -1,0 +1,49 @@
+{% extends 'basestructure.html' %}
+{% load static %}
+
+{% block title %} Social Media Mockup {% endblock %}
+
+{% block content %}
+<section class="social-mockup-section">
+  <h2>Social Media Marketing Mockup</h2>
+  <p>Platform selected: <strong>{{ platform|title }}</strong></p>
+
+  {% if platform == "facebook" %}
+    <div class="mockup facebook">
+      <h3>Facebook Post</h3>
+      <p>📢 Big Sale on Plastic Wares! 🛒</p>
+      <p>Get 20% off this week only. Visit our store now!</p>
+      <img src="{% static 'image/facebook_mockup.png' %}" alt="Facebook Post Design">
+    </div>
+
+  {% elif platform == "instagram" %}
+    <div class="mockup instagram">
+      <h3>Instagram Post</h3>
+      <p>🧺✨ Organize your space with style!</p>
+      <p>#PrecyPlastic #StorageGoals #Sale</p>
+      <img src="{% static 'image/instagram_mockup.png' %}" alt="Instagram Post Design">
+    </div>
+
+  {% elif platform == "tiktok" %}
+    <div class="mockup tiktok">
+      <h3>TikTok Video Caption</h3>
+      <p>🎥 Watch how our containers transform your home!</p>
+      <p>#PrecyPlastic #HomeHack #TikTokMadeMeBuyIt</p>
+      <img src="{% static 'image/tiktok_mockup.png' %}" alt="TikTok Post Design">
+    </div>
+
+  {% elif platform == "youtube" %}
+    <div class="mockup youtube">
+      <h3>YouTube Video Thumbnail</h3>
+      <p>🧼 Declutter Your Space with Precy Plastic Wares</p>
+      <p>Subscribe for more home hacks!</p>
+      <img src="{% static 'image/youtube_mockup.png' %}" alt="YouTube Thumbnail Design">
+    </div>
+
+  {% else %}
+    <p>No platform selected.</p>
+  {% endif %}
+
+  <a href="{% url 'contact' %}" class="btn">Back to Contact</a>
+</section>
+{% endblock %}

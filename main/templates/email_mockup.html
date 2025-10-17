@@ -1,0 +1,24 @@
+{% extends 'basestructure.html' %}
+{% load static %}
+
+{% block title %} About {% endblock %}
+
+{% block content %} 
+<section class="email-mockup-section">
+  <div class="email-container">
+    <div class="email-header">
+      <h1>Precy Plastic Wares <br>(EMAIL MARKETING)</h1>
+    </div>
+    <div class="email-body">
+      <h2>Hi there!</h2>
+      <p>Thank you for reaching out. Here's a sample email marketing content:</p>
+      <p><strong>Get 20% off on all storage containers this week only!</strong></p>
+      <a href="#" class="cta-button">Shop Now</a>
+      <a href="{% url 'contact'%}" class="go_back">Go Back</a>
+    </div>
+    <div class="email-footer">
+      © 2025 Precy Plastic Wares. All rights reserved.
+    </div>
+  </div>
+{% endblock %}
+

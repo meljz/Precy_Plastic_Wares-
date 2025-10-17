@@ -112,3 +112,20 @@ sortSelect.addEventListener("change", filterAndSortProducts);
 
 // Initial render
 renderProducts(products);
+
+//script for contact page
+ function handleRedirect(event) {
+    event.preventDefault();
+
+    const platform = document.getElementById("platform").value;
+    if (!platform) {
+      alert("Please select a platform.");
+      return;
+    }
+
+    if (platform === "email") {
+      window.location.href = emailMockupUrl;
+    } else {
+      window.location.href = `${socialMockupBaseUrl}?platform=${platform}`;
+    }
+  }
