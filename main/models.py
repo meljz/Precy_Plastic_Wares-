@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # API ENDPOINTS
 
@@ -22,6 +23,17 @@ class Customer (models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.brand})"
+
+
+class UserProfile(models.Model):   #this is for the signup page's customer information
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    gender = models.CharField(max_length=10)
+    address = models.CharField(max_length=255)
+    contact = models.CharField(max_length=20)
+    dob = models.DateField()
+
+    def __str__(self):
+        return f"{self.user.username}'s profile"
 
 class ContactMessage (models.Model):
     name = models.CharField(max_length=100)

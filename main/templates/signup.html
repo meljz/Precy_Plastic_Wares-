@@ -7,7 +7,8 @@
     <div class="form-container">
     <div class="login-box">
       <h3 class="brand-heading">Precy Plastic Wares</h3>
-      <form id="signupForm">
+      <form id="signupForm" method="POST">  <!--POST METHOD IMPLEMENTED-->
+         {% csrf_token %}
         <div class="user-box">
           <label for="first_name">First Name:</label>
           <input type="text" id="first_name" name="first_name" required />
@@ -49,7 +50,7 @@
         </div>
 
         <div class="button-group" style="display: flex; gap: 15px; margin-top: 20px; justify-content: center;">
-          <button type="button" class="login-btn" onclick="displayInput()">Submit</button>
+          <button type="submit" class="login-btn">Submit</button>
          <button type="reset" class="login-btn" id="resetBtn">Reset</button>
 
         </div>

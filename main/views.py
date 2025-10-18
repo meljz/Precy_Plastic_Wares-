@@ -1,11 +1,16 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .models import Product, Customer, ContactMessage
+from .models import Product, Customer, ContactMessage, UserProfile
 from .serializers import ProductSerializer, CustomerSerializer, ContactMessageSerializer
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
+
+#========================PAGES START==============================#
 def home(request):
     return render (request, "landing.html")
 
@@ -22,7 +27,54 @@ def contact(request):
     return render (request, "contact.html")
 
 def signup(request):
-    return render (request, "signup.html")
+    #return render (request, "signup.html")
+    if request.method == "POST":
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        gender = request.POST.get("gender")
+        address = request.POST.get("address")
+        contact = request.POST.get("contact")
+        email = request.POST.get("email")
+        dob = request.POST.get("dob")
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        if User.objects.filter (username=username).exists ():
+            return render (request, "signup.html", {"error": "Username already exist"})
+
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name
+        )
+        # ✅ Create linked profile
+        UserProfile.objects.create(
+            user=user,
+            gender=gender,
+            address=address,
+            contact=contact,
+            dob=dob
+        )
+        return redirect("landing")
+    return render(request, "signup.html")
+
+#login
+def login_view(request): 
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("landing")  # or your dashboard/homepage
+        else:
+            return render(request, "login.html", {"error": "Invalid credentials"})
+
+    return render(request, "login.html")
+#========================PAGES ENDS==============================#
 
 def email_mockup (request):
     return render (request, "email_mockup.html")
