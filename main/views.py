@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 
@@ -69,28 +70,62 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("landing")  # or your dashboard/homepage
+            # ✅ Redirect to welcome page
+            return redirect("welcome")
         else:
-            return render(request, "login.html", {"error": "Invalid credentials"})
+            return render(request, "login.html", {
+                "error": "Invalid credentials",
+                "hide_footer": True  # ✅ Hide footer
+            })
 
-    return render(request, "login.html")
+    return render(request, "login.html", {
+        "hide_footer": True  # ✅ Hide footer
+    })
+#welcom
+@login_required(login_url='login')  # ✅ REQUIRES login
+def welcome(request):
+    user = request.user
+    try:
+        profile = UserProfile.objects.get(user=user)
+    except UserProfile.DoesNotExist:
+        profile = None
+    
+    # ✅ SHOWS user profile
+    return render(request, "welcome.html", {"profile": profile, "hide_footer": True })
+
+def logout_view(request):
+    logout(request)  # ✅ CLEARS session
+    return redirect("landing")  # ✅ REDIRECTS to home
 #========================PAGES ENDS==============================#
 
+
 def email_mockup (request):
-    return render (request, "email_mockup.html")
+    return render (request, "email_mockup.html", {
+        "hide_footer": True  # ✅ Hide footer
+    })
 
 def social_mockup (request):
     platform = request.GET.get('platform', '')
-    return render (request, "social_mockup.html", {"platform": platform})
+    return render (request, "social_mockup.html", {
+        "platform": platform,
+        "hide_footer": True  # ✅ Hide footer
+    })
 
 def customer_list_page(request):
     customers = Customer.objects.all().order_by('-id')  # newest first
-    return render(request, 'customer_list.html', {"customers": customers})
+    return render(request, 'customer_list.html', {
+        "customers": customers,
+        "hide_footer": True  # ✅ Hide footer on this page
+    })
+
 
 
 def customer_messages_page(request):
     messages = ContactMessage.objects.all().order_by('-date_sent')
-    return render(request, 'customer_message.html', {"messages": messages})
+    return render(request, 'customer_message.html', {
+        "messages": messages,
+        "hide_footer": True 
+        })
 
 
 @csrf_exempt

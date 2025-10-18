@@ -25,17 +25,31 @@
       <a href="{% url 'featured' %}">Featured</a>
       <a href="{% url 'product' %}">Products</a>
       <a href="{% url 'contact' %}">Contact</a>
-      <a href="{% url 'login' %}">Login</a>
-      <a href="{% url 'signup' %}">Signup</a>
+      
+      <!-- ✅ SHOW LOGIN/LOGOUT BASED ON USER STATUS -->
+      {% if user.is_authenticated %}
+        <!-- User is logged in -->
+        <a href="{% url 'welcome' %}" style="color: #6a1b9a; font-weight: 600;">👤 {{ user.first_name|default:user.username }}</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+        <!-- User is not logged in -->
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">Signup</a>
+      {% endif %}
     </nav>
   </header>
 
         {% block content %}  <!---THIS IS WHERE THE CONTENTS OF EACH HTML's EXTENDS TO-->
         {% endblock %}
 
-   <footer>
+    
+   
+      {% if not hide_footer %}
+  <footer>
     <p>&copy; 2025 Precy Plastic Wares. All rights reserved.</p>
   </footer>
+  {% endif %}
+
 
   <script>
     const emailMockupUrl = "{% url 'email_mockup' %}";

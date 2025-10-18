@@ -132,6 +132,7 @@ h2 {
   margin: 0 0 30px;
   font-size: 2rem;
   color: #6a1b9a;
+  text-align: center;
 }
 
 
@@ -350,6 +351,7 @@ h2 {
 
 
   /*-------------------------------------------------------------------contact page section-------------------------------------------------------------------*/
+  
   .contact_page .contact_section {
   width: 70%;
   min-height: 82vh;
@@ -358,6 +360,7 @@ h2 {
   background: #f9f9f9;
   border-radius: 12px;
   }
+
 
  .contact_page .contact_section h2{
   text-align: center;
@@ -398,9 +401,58 @@ h2 {
   .btn:hover {
     background-color: #005050;
   }
+  .btn-view-customers-btn{
+    width: 240px;
+     display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+     background: linear-gradient(to right, #9b3fe2, #6a1b9a);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+  }
+  .button-row {
+    display: flex;
+    justify-content: center; /* centers the row horizontally */
+    gap: 20px; /* space between buttons */
+    margin-top: 5px;
+    flex-wrap: wrap; /* optional: allows wrapping on small screens */
+  }
+
+   .btn-view-messages-btn{
+    width: 240px;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+     background: linear-gradient(to right, #9b3fe2, #6a1b9a);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+  }
 
   /* Footer */
+
   footer {
+    text-align: center;
+  padding: 10px 10px;
+  background: #000000;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  margin-top: auto; /* 👈 pushes footer to bottom */
     text-align: center;
     padding: 10px 10px;
     background: #000000;
@@ -960,6 +1012,14 @@ body.product_page .product-card button.btn:hover {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+}
+
+.map h2 {
+    padding-top: 50px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif; 
+  margin-bottom: 20px; 
 
 }
 

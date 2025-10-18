@@ -1,0 +1,38 @@
+{% extends 'basestructure.html' %}
+{% load static %}
+
+{% block title %} Welcome {% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <div class="login-box">
+    <h3 class="brand-heading">Welcome! 👋</h3>
+    
+    <div style="background: #fff; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+      <h2 style="text-align: center; font-size: 1.8rem; color: #4a1664; margin-bottom: 20px;">
+        Hello, {{ user.first_name|default:user.username }}!
+      </h2>
+      
+      {% if profile %}
+        <div class="profile-info" style="background: #f9f9f9; padding: 15px; border-radius: 8px; text-align: left;">
+          <p style="margin: 10px 0; color: #3c2a4d;"><strong>Username:</strong> {{ user.username }}</p>
+          <p style="margin: 10px 0; color: #3c2a4d;"><strong>Email:</strong> {{ user.email }}</p>
+          <p style="margin: 10px 0; color: #3c2a4d;"><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+          <p style="margin: 10px 0; color: #3c2a4d;"><strong>Gender:</strong> {{ profile.gender }}</p>
+          <p style="margin: 10px 0; color: #3c2a4d;"><strong>Address:</strong> {{ profile.address }}</p>
+          <p style="margin: 10px 0; color: #3c2a4d;"><strong>Contact Number:</strong> {{ profile.contact }}</p>
+          <p style="margin: 10px 0; color: #3c2a4d;"><strong>Date of Birth:</strong> {{ profile.dob|date:"M d, Y" }}</p>
+        </div>
+      {% else %}
+        <p style="text-align: center; color: #6a1b9a;">No profile information found.</p>
+      {% endif %}
+
+      <div class="button-group" style="display: flex; gap: 15px; margin-top: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="{% url 'landing' %}" class="btn" style="padding: 12px 24px; text-decoration: none; display: inline-block;">Back to Home</a>
+        <a href="{% url 'product' %}" class="btn" style="padding: 12px 24px; text-decoration: none; display: inline-block;">Shop Products</a>
+        <a href="{% url 'logout' %}" class="login-btn" style="padding: 8px 16px; background: #dc3545; color: white; text-decoration: none; display: inline-block; border: 1px solid #dc3545;">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
