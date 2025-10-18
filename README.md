@@ -4,7 +4,7 @@
 Prerequisites: Python 3.8+ and Git
 
 1. Clone Repository:
-      git clone https://github.com/meljz/Precy_Plastic_Wares-.git
+      git clone https://github.com/meljz/Precy_Plastic_Wares-.git. Then go to:
       cd Precy_Plastic_Wares-
 
 2. Create Virtual Environment (this is for windows):
